@@ -1,883 +1,354 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>前期定期考査Ⅱ 化学 小問別自学復習</title>
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>前期定期考査Ⅱ 化学 小問別復習</title>
 <style>
-:root{--bg:#f6f7fb;--card:#fff;--ink:#1f2937;--muted:#6b7280;--main:#2563eb;--ok:#16a34a;--ng:#dc2626;--warn:#f59e0b;--line:#e5e7eb}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
-header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);padding:14px 18px}
-h1{font-size:20px;margin:0 0 8px}
-.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:700}
-button.active{background:var(--main);color:white}
-.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;min-width:180px;flex:1}
-#bar{height:100%;width:0;background:linear-gradient(90deg,var(--main),var(--ok))}
-.stats{font-size:13px;color:var(--muted);font-weight:700}
-main{max-width:980px;margin:20px auto;padding:0 14px 60px}
-.intro,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
-.card.done{border-left:8px solid var(--ok)}.card.wrong{border-left:8px solid var(--ng)}.card.review{border-left:8px solid var(--warn)}
-.card h2{font-size:19px;margin:0 0 8px}
-.answer{background:#f8fafc;border-left:4px solid var(--main);padding:10px 12px;border-radius:10px;margin:10px 0}
-.miss{background:#fff7ed;border-left:4px solid var(--warn);padding:10px 12px;border-radius:10px;margin:10px 0}
-.quiz{background:#f0fdf4;border-left:4px solid var(--ok);padding:10px 12px;border-radius:10px;margin:10px 0}
-details{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:10px 0}
-summary{cursor:pointer;font-weight:800}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.hidden{display:none!important}
-.jump{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.jump button{font-size:12px;padding:5px 9px}
-.small{font-size:13px;color:var(--muted)}
-@media(max-width:640px){header{position:static}.controls{display:block}.controls>*{margin:4px 0}.progress{width:100%}}
-</style>
-</head>
-<body>
-<header>
-<h1>前期定期考査Ⅱ 化学｜小問別 自学復習ページ</h1>
-<div class="controls">
-<button class="active" onclick="setFilter('all',this)">すべて</button>
-<button onclick="setFilter('wrong',this)">間違えた問題だけ</button>
-<button onclick="setFilter('todo',this)">未完了だけ</button>
-<button onclick="setFilter('review',this)">もう一度だけ</button>
-<button onclick="resetAll()">記録リセット</button>
-<div class="progress"><div id="bar"></div></div>
-<span class="stats" id="stats"></span>
-</div>
-</header>
-<main>
-<section class="intro">
-<h2>使い方</h2>
-<p>大問ごとではなく、<b>小問1つずつ</b>復習できるようにしました。答案で間違えた番号だけ「間違えた」にしておくと、あとで「間違えた問題だけ表示」で確認できます。</p>
-<div class="jump">
-<button onclick="jumpTo('q1')">1へ</button><button onclick="jumpTo('q6')">2へ</button><button onclick="jumpTo('q13')">3へ</button><button onclick="jumpTo('q24')">4へ</button><button onclick="jumpTo('q30')">5へ</button><button onclick="jumpTo('q36')">6へ</button><button onclick="jumpTo('q39')">7へ</button><button onclick="jumpTo('q44')">8へ</button><button onclick="jumpTo('q55')">9へ</button>
-</div>
-<p class="small">記録はこの端末・このブラウザに保存されます。</p>
+:root{--bg:#f7f7fb;--card:#fff;--ink:#1f2937;--muted:#6b7280;--main:#2563eb;--ok:#16a34a;--ng:#dc2626;--warn:#f59e0b;--line:#e5e7eb}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:var(--bg);color:var(--ink);line-height:1.75}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);padding:12px 16px}h1{font-size:20px;margin:0 0 8px}
+.controls,.nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px}button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:700}button.active{background:var(--main);color:#fff}
+.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden;min-width:180px;flex:1}#bar{height:100%;width:0;background:linear-gradient(90deg,var(--main),var(--ok))}.stats{font-size:13px;color:var(--muted);font-weight:700}
+main{max-width:1000px;margin:20px auto;padding:0 14px 70px}.intro,.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;box-shadow:0 6px 18px rgba(0,0,0,.04)}
+.card.done{border-left:8px solid var(--ok)}.card.wrong{border-left:8px solid var(--ng)}.card.review{border-left:8px solid var(--warn)}.head{display:flex;justify-content:space-between;align-items:center}h2{font-size:18px;margin:0 0 8px}.head span{background:#eef2ff;color:#3730a3;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:800}
+.problem{background:#eff6ff;border-left:5px solid var(--main);padding:12px;border-radius:12px;margin:10px 0}.answer{background:#f8fafc;border-left:4px solid var(--main);padding:10px 12px;border-radius:10px;margin:10px 0}.miss{background:#fff7ed;border-left:4px solid var(--warn);padding:10px 12px;border-radius:10px;margin:10px 0}.quiz{background:#f0fdf4;border-left:4px solid var(--ok);padding:10px 12px;border-radius:10px;margin:10px 0}details{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:10px 0}summary{cursor:pointer;font-weight:800}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.hidden{display:none!important}
+@media(max-width:700px){header{position:static}.controls,.nav{display:block}.controls>*,.nav>*{margin:4px 0}.progress{width:100%}}
+</style></head><body><header><h1>前期定期考査Ⅱ 化学｜問題つき小問別復習</h1>
+<div class="controls"><button class="active" onclick="setFilter('all',this)">すべて</button><button onclick="setFilter('wrong',this)">間違えた問題だけ</button><button onclick="setFilter('todo',this)">未完了だけ</button><button onclick="setFilter('review',this)">もう一度だけ</button><button onclick="resetAll()">記録リセット</button><div class="progress"><div id="bar"></div></div><span class="stats" id="stats"></span></div>
+<div class="nav"><button onclick="setBig('all',this)" class="active">全大問</button><button onclick="setBig('1')">大問1</button><button onclick="setBig('2')">大問2</button><button onclick="setBig('3')">大問3</button><button onclick="setBig('4')">大問4</button><button onclick="setBig('5')">大問5</button><button onclick="setBig('6')">大問6</button><button onclick="setBig('7')">大問7</button><button onclick="setBig('8')">大問8</button><button onclick="setBig('9')">大問9</button></div></header><main>
+<section class="intro"><h2>使い方</h2><p>大問番号を選ぶと、その大問の小問だけを表示します。各カードで「問題→答え→解説→類題」の順に復習できます。間違えた問題は記録して、あとで「間違えた問題だけ」で確認できます。</p><p>類題は、化学結合・物質量の基本事項をもとにしたオリジナル問題です。</p></section>
+
+<section class="card" data-id="q1" data-big="1">
+<div class="head"><h2>大問1 (ア)</h2><span>#1</span></div>
+<div class="problem"><b>問題</b><br>中心原子のまわりの電子対の組数を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">4</div></details>
+<details open><summary>解説</summary><p>共有電子対と非共有電子対を合わせて数える。電子対が4組なら基本配置は正四面体。</p></details>
+<div class="miss"><b>よくあるミス：</b>結合の本数だけでなく非共有電子対も数える。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">H₂OのO原子のまわりの電子対は何組か。</div><details><summary>類題の答え</summary>4組</details></details>
+<div class="actions"><button onclick="mark('q1','done')">わかった</button><button onclick="mark('q1','wrong')">間違えた</button><button onclick="mark('q1','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q1">
-  <h2>1(ア)　電子対の数</h2>
-  <div class="answer"><b>答え：4</b></div>
-  <p><b>考え方：</b><br>中心原子のまわりの電子対の組数を数える。結合電子対と非共有電子対を合わせて考える。</p>
-  <div class="miss"><b>よくあるミス：</b>結合の本数だけで判断しない。非共有電子対も数える。</div>
-  <div class="quiz"><b>確認問題：</b>H₂OのO原子のまわりの電子対は何組か。</div>
-  <details><summary>確認問題の答え</summary>4組</details>
-  <div class="actions">
-    <button onclick="mark('q1','done')">わかった</button>
-    <button onclick="mark('q1','wrong')">間違えた</button>
-    <button onclick="mark('q1','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q2" data-big="1">
+<div class="head"><h2>大問1 (イ)</h2><span>#2</span></div>
+<div class="problem"><b>問題</b><br>電子対が4組あるときの基本的な電子対配置を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">正四面体</div></details>
+<details open><summary>解説</summary><p>電子対は反発し、4組では最も離れる配置が正四面体になる。</p></details>
+<div class="miss"><b>よくあるミス：</b>NH₃の分子形と電子対配置を混同しない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">CH₄の分子の形は何か。</div><details><summary>類題の答え</summary>正四面体</details></details>
+<div class="actions"><button onclick="mark('q2','done')">わかった</button><button onclick="mark('q2','wrong')">間違えた</button><button onclick="mark('q2','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q2">
-  <h2>1(イ)　分子の形</h2>
-  <div class="answer"><b>答え：正四面体</b></div>
-  <p><b>考え方：</b><br>電子対が4組あると、電子対どうしの反発が最小になる配置は正四面体型になる。</p>
-  <div class="miss"><b>よくあるミス：</b>分子の形と電子対配置を混同しない。</div>
-  <div class="quiz"><b>確認問題：</b>CH₄の分子の形は何か。</div>
-  <details><summary>確認問題の答え</summary>正四面体</details>
-  <div class="actions">
-    <button onclick="mark('q2','done')">わかった</button>
-    <button onclick="mark('q2','wrong')">間違えた</button>
-    <button onclick="mark('q2','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q3" data-big="1">
+<div class="head"><h2>大問1 (ウ)</h2><span>#3</span></div>
+<div class="problem"><b>問題</b><br>中心原子のまわりの電子対領域の数を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">3</div></details>
+<details open><summary>解説</summary><p>電子対領域が3つなら平面三角形型に広がる。</p></details>
+<div class="miss"><b>よくあるミス：</b>分子形では二重結合も1つの電子対領域として見る。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">BF₃のB原子のまわりの電子対領域はいくつか。</div><details><summary>類題の答え</summary>3つ</details></details>
+<div class="actions"><button onclick="mark('q3','done')">わかった</button><button onclick="mark('q3','wrong')">間違えた</button><button onclick="mark('q3','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q3">
-  <h2>1(ウ)　電子対の数</h2>
-  <div class="answer"><b>答え：3</b></div>
-  <p><b>考え方：</b><br>中心原子のまわりにある電子対を数える。3組なら平面三角形型の配置になる。</p>
-  <div class="miss"><b>よくあるミス：</b>二重結合は電子対2組として数える場面と、電子対領域1つとして見る場面の違いに注意。</div>
-  <div class="quiz"><b>確認問題：</b>BF₃のB原子のまわりの電子対領域はいくつか。</div>
-  <details><summary>確認問題の答え</summary>3つ</details>
-  <div class="actions">
-    <button onclick="mark('q3','done')">わかった</button>
-    <button onclick="mark('q3','wrong')">間違えた</button>
-    <button onclick="mark('q3','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q4" data-big="1">
+<div class="head"><h2>大問1 (エ)</h2><span>#4</span></div>
+<div class="problem"><b>問題</b><br>NH₃の中心原子Nにある非共有電子対の数を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">1</div></details>
+<details open><summary>解説</summary><p>Nは価電子5個。N-H結合を3本作ると、残り2個が1組の非共有電子対。</p></details>
+<div class="miss"><b>よくあるミス：</b>Nの価電子5個を意識する。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">PH₃のP原子上の非共有電子対は何組か。</div><details><summary>類題の答え</summary>1組</details></details>
+<div class="actions"><button onclick="mark('q4','done')">わかった</button><button onclick="mark('q4','wrong')">間違えた</button><button onclick="mark('q4','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q4">
-  <h2>1(エ)　非共有電子対</h2>
-  <div class="answer"><b>答え：1</b></div>
-  <p><b>考え方：</b><br>NH₃ではN-H結合が3本、N上に非共有電子対が1組ある。</p>
-  <div class="miss"><b>よくあるミス：</b>Nの価電子5個から、結合に使った3個を引くと2個＝1組。</div>
-  <div class="quiz"><b>確認問題：</b>NH₃のN原子上の非共有電子対は何組か。</div>
-  <details><summary>確認問題の答え</summary>1組</details>
-  <div class="actions">
-    <button onclick="mark('q4','done')">わかった</button>
-    <button onclick="mark('q4','wrong')">間違えた</button>
-    <button onclick="mark('q4','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q5" data-big="1">
+<div class="head"><h2>大問1 (オ)</h2><span>#5</span></div>
+<div class="problem"><b>問題</b><br>NH₃の分子の形を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">三角錐</div></details>
+<details open><summary>解説</summary><p>電子対配置は正四面体型だが、見える原子Hは3個なので分子の形は三角錐。</p></details>
+<div class="miss"><b>よくあるミス：</b>電子対配置は正四面体、分子形は三角錐。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">H₂Oの分子の形は何か。</div><details><summary>類題の答え</summary>折れ線形</details></details>
+<div class="actions"><button onclick="mark('q5','done')">わかった</button><button onclick="mark('q5','wrong')">間違えた</button><button onclick="mark('q5','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q5">
-  <h2>1(オ)　分子の形</h2>
-  <div class="answer"><b>答え：三角錐</b></div>
-  <p><b>考え方：</b><br>NH₃は電子対配置は正四面体型だが、原子の位置だけを見ると三角錐になる。</p>
-  <div class="miss"><b>よくあるミス：</b>正四面体型と答えない。NH₃の分子形は三角錐。</div>
-  <div class="quiz"><b>確認問題：</b>H₂Oの分子の形は何か。</div>
-  <details><summary>確認問題の答え</summary>折れ線形</details>
-  <div class="actions">
-    <button onclick="mark('q5','done')">わかった</button>
-    <button onclick="mark('q5','wrong')">間違えた</button>
-    <button onclick="mark('q5','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q6" data-big="2">
+<div class="head"><h2>大問2 (1)①</h2><span>#6</span></div>
+<div class="problem"><b>問題</b><br>Na⁺とCl⁻からできる物質の組成式と名称を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">NaCl／塩化ナトリウム</div></details>
+<details open><summary>解説</summary><p>Na⁺とCl⁻は1価どうしなので1:1で結びつく。</p></details>
+<div class="miss"><b>よくあるミス：</b>電荷の合計が0になる比で書く。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">Mg²⁺とCl⁻からできる組成式は？</div><details><summary>類題の答え</summary>MgCl₂</details></details>
+<div class="actions"><button onclick="mark('q6','done')">わかった</button><button onclick="mark('q6','wrong')">間違えた</button><button onclick="mark('q6','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q6">
-  <h2>2(1)①　組成式・名称</h2>
-  <div class="answer"><b>答え：NaCl／塩化ナトリウム</b></div>
-  <p><b>考え方：</b><br>Na⁺とCl⁻が1:1で結びつくのでNaCl。</p>
-  <div class="miss"><b>よくあるミス：</b>NaCl₂などにしない。電荷の合計が0になる比で書く。</div>
-  <div class="quiz"><b>確認問題：</b>Mg²⁺とCl⁻からできる組成式は？</div>
-  <details><summary>確認問題の答え</summary>MgCl₂</details>
-  <div class="actions">
-    <button onclick="mark('q6','done')">わかった</button>
-    <button onclick="mark('q6','wrong')">間違えた</button>
-    <button onclick="mark('q6','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q7" data-big="2">
+<div class="head"><h2>大問2 (1)②</h2><span>#7</span></div>
+<div class="problem"><b>問題</b><br>Al³⁺とOH⁻からできる物質の組成式と名称を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">Al(OH)₃／水酸化アルミニウム</div></details>
+<details open><summary>解説</summary><p>Al³⁺を打ち消すにはOH⁻が3個必要。多原子イオンが複数あるのでOHをかっこでくくる。</p></details>
+<div class="miss"><b>よくあるミス：</b>AlOH₃ではなくAl(OH)₃。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">Ca²⁺とOH⁻からできる組成式は？</div><details><summary>類題の答え</summary>Ca(OH)₂</details></details>
+<div class="actions"><button onclick="mark('q7','done')">わかった</button><button onclick="mark('q7','wrong')">間違えた</button><button onclick="mark('q7','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q7">
-  <h2>2(1)②　組成式・名称</h2>
-  <div class="answer"><b>答え：Al(OH)₃／水酸化アルミニウム</b></div>
-  <p><b>考え方：</b><br>Al³⁺に対してOH⁻が3個必要。多原子イオンOH⁻が複数あるのでかっこをつける。</p>
-  <div class="miss"><b>よくあるミス：</b>AlOH₃ではなくAl(OH)₃。</div>
-  <div class="quiz"><b>確認問題：</b>Ca²⁺とOH⁻からできる組成式は？</div>
-  <details><summary>確認問題の答え</summary>Ca(OH)₂</details>
-  <div class="actions">
-    <button onclick="mark('q7','done')">わかった</button>
-    <button onclick="mark('q7','wrong')">間違えた</button>
-    <button onclick="mark('q7','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q8" data-big="2">
+<div class="head"><h2>大問2 (1)③</h2><span>#8</span></div>
+<div class="problem"><b>問題</b><br>Ca²⁺とPO₄³⁻からできる物質の組成式と名称を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">Ca₃(PO₄)₂／リン酸カルシウム</div></details>
+<details open><summary>解説</summary><p>電荷を最小公倍数6でそろえる。Ca²⁺が3個、PO₄³⁻が2個。</p></details>
+<div class="miss"><b>よくあるミス：</b>PO₄が2個なのでかっこをつける。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">Al³⁺とSO₄²⁻からできる組成式は？</div><details><summary>類題の答え</summary>Al₂(SO₄)₃</details></details>
+<div class="actions"><button onclick="mark('q8','done')">わかった</button><button onclick="mark('q8','wrong')">間違えた</button><button onclick="mark('q8','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q8">
-  <h2>2(1)③　組成式・名称</h2>
-  <div class="answer"><b>答え：Ca₃(PO₄)₂／リン酸カルシウム</b></div>
-  <p><b>考え方：</b><br>Ca²⁺とPO₄³⁻の電荷を最小公倍数6でそろえる。Ca²⁺が3個、PO₄³⁻が2個。</p>
-  <div class="miss"><b>よくあるミス：</b>リン酸イオンが2個なのでPO₄にかっこをつける。</div>
-  <div class="quiz"><b>確認問題：</b>Al³⁺とSO₄²⁻からできる組成式は？</div>
-  <details><summary>確認問題の答え</summary>Al₂(SO₄)₃</details>
-  <div class="actions">
-    <button onclick="mark('q8','done')">わかった</button>
-    <button onclick="mark('q8','wrong')">間違えた</button>
-    <button onclick="mark('q8','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q9" data-big="2">
+<div class="head"><h2>大問2 (2)①</h2><span>#9</span></div>
+<div class="problem"><b>問題</b><br>H₂Oの電子式と構造式を示せ。</div>
+<details><summary>答えを見る</summary><div class="answer">Oに非共有電子対2組、構造式 H-O-H</div></details>
+<details open><summary>解説</summary><p>Oは価電子6個。Hと単結合を2本作り、O上に非共有電子対が2組残る。</p></details>
+<div class="miss"><b>よくあるミス：</b>Oの非共有電子対を書き忘れない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">NH₃のN上の非共有電子対は何組か。</div><details><summary>類題の答え</summary>1組</details></details>
+<div class="actions"><button onclick="mark('q9','done')">わかった</button><button onclick="mark('q9','wrong')">間違えた</button><button onclick="mark('q9','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q9">
-  <h2>2(2)①　電子式・構造式</h2>
-  <div class="answer"><b>答え：H₂Oの電子式・H-O-H</b></div>
-  <p><b>考え方：</b><br>Oは価電子6個。Hと単結合を2本作り、O上に非共有電子対が2組残る。</p>
-  <div class="miss"><b>よくあるミス：</b>Oの非共有電子対を書き忘れない。</div>
-  <div class="quiz"><b>確認問題：</b>NH₃のN上の非共有電子対は何組か。</div>
-  <details><summary>確認問題の答え</summary>1組</details>
-  <div class="actions">
-    <button onclick="mark('q9','done')">わかった</button>
-    <button onclick="mark('q9','wrong')">間違えた</button>
-    <button onclick="mark('q9','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q10" data-big="2">
+<div class="head"><h2>大問2 (2)②</h2><span>#10</span></div>
+<div class="problem"><b>問題</b><br>N₂の電子式と構造式を示せ。</div>
+<details><summary>答えを見る</summary><div class="answer">N≡N</div></details>
+<details open><summary>解説</summary><p>Nは価電子5個。3組の電子対を共有して三重結合を作り、それぞれに非共有電子対が1組残る。</p></details>
+<div class="miss"><b>よくあるミス：</b>N=NではなくN≡N。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">O₂のO-O結合は何重結合か。</div><details><summary>類題の答え</summary>二重結合</details></details>
+<div class="actions"><button onclick="mark('q10','done')">わかった</button><button onclick="mark('q10','wrong')">間違えた</button><button onclick="mark('q10','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q10">
-  <h2>2(2)②　電子式・構造式</h2>
-  <div class="answer"><b>答え：N₂の電子式・N≡N</b></div>
-  <p><b>考え方：</b><br>Nは価電子5個。互いに3組の電子対を共有して三重結合を作り、それぞれに非共有電子対が1組残る。</p>
-  <div class="miss"><b>よくあるミス：</b>N=NではなくN≡N。</div>
-  <div class="quiz"><b>確認問題：</b>CO₂のCとOの結合は単結合か二重結合か。</div>
-  <details><summary>確認問題の答え</summary>二重結合</details>
-  <div class="actions">
-    <button onclick="mark('q10','done')">わかった</button>
-    <button onclick="mark('q10','wrong')">間違えた</button>
-    <button onclick="mark('q10','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q11" data-big="2">
+<div class="head"><h2>大問2 (2)③</h2><span>#11</span></div>
+<div class="problem"><b>問題</b><br>HCNの電子式と構造式を示せ。</div>
+<details><summary>答えを見る</summary><div class="answer">H-C≡N</div></details>
+<details open><summary>解説</summary><p>Cは4本、Nは3本、Hは1本の結合を作りやすいのでH-C≡N。</p></details>
+<div class="miss"><b>よくあるミス：</b>H-N≡Cのように並べない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">C₂H₂のC-C結合は何重結合か。</div><details><summary>類題の答え</summary>三重結合</details></details>
+<div class="actions"><button onclick="mark('q11','done')">わかった</button><button onclick="mark('q11','wrong')">間違えた</button><button onclick="mark('q11','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q11">
-  <h2>2(2)③　電子式・構造式</h2>
-  <div class="answer"><b>答え：HCNの電子式・H-C≡N</b></div>
-  <p><b>考え方：</b><br>Cは4本、Nは3本、Hは1本の結合を作りやすい。H-C-Nで、CとNの間は三重結合。</p>
-  <div class="miss"><b>よくあるミス：</b>H-N≡Cのように並べない。通常はH-C≡N。</div>
-  <div class="quiz"><b>確認問題：</b>アセチレンC₂H₂のC-C結合は何重結合か。</div>
-  <details><summary>確認問題の答え</summary>三重結合</details>
-  <div class="actions">
-    <button onclick="mark('q11','done')">わかった</button>
-    <button onclick="mark('q11','wrong')">間違えた</button>
-    <button onclick="mark('q11','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q12" data-big="2">
+<div class="head"><h2>大問2 (3)</h2><span>#12</span></div>
+<div class="problem"><b>問題</b><br>配位結合をもたないものを選べ。</div>
+<details><summary>答えを見る</summary><div class="answer">④ HCOO⁻</div></details>
+<details open><summary>解説</summary><p>NH₄⁺、H₃O⁺、[Ag(NH₃)₂]⁺は配位結合をもつ。HCOO⁻はギ酸からH⁺が取れたイオン。</p></details>
+<div class="miss"><b>よくあるミス：</b>イオンならすべて配位結合、ではない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">NH₄⁺とCl⁻のうち、配位結合をもつものは？</div><details><summary>類題の答え</summary>NH₄⁺</details></details>
+<div class="actions"><button onclick="mark('q12','done')">わかった</button><button onclick="mark('q12','wrong')">間違えた</button><button onclick="mark('q12','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q12">
-  <h2>2(3)　配位結合</h2>
-  <div class="answer"><b>答え：④</b></div>
-  <p><b>考え方：</b><br>NH₄⁺、H₃O⁺、[Ag(NH₃)₂]⁺は非共有電子対をH⁺やAg⁺に与えてできる。HCOO⁻はギ酸からH⁺が取れたイオンで、配位結合でできたものではない。</p>
-  <div class="miss"><b>よくあるミス：</b>イオンならすべて配位結合、ではない。</div>
-  <div class="quiz"><b>確認問題：</b>NH₄⁺とCl⁻のうち、配位結合をもつものは？</div>
-  <details><summary>確認問題の答え</summary>NH₄⁺</details>
-  <div class="actions">
-    <button onclick="mark('q12','done')">わかった</button>
-    <button onclick="mark('q12','wrong')">間違えた</button>
-    <button onclick="mark('q12','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q13" data-big="3">
+<div class="head"><h2>大問3 融点・沸点</h2><span>#13</span></div>
+<div class="problem"><b>問題</b><br>共有結合の結晶の融点・沸点の特徴を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">高い</div></details>
+<details open><summary>解説</summary><p>原子が共有結合で巨大な網目構造を作るため高い。</p></details>
+<div class="miss"><b>よくあるミス：</b>分子結晶と混同しない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">ダイヤモンドは何結晶か。</div><details><summary>類題の答え</summary>共有結合の結晶</details></details>
+<div class="actions"><button onclick="mark('q13','done')">わかった</button><button onclick="mark('q13','wrong')">間違えた</button><button onclick="mark('q13','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q13">
-  <h2>3(ア)　共有結合の結晶</h2>
-  <div class="answer"><b>答え：(b)</b></div>
-  <p><b>考え方：</b><br>共有結合の結晶は原子どうしが共有結合で巨大な網目構造を作るため、融点・沸点が高い。</p>
-  <div class="miss"><b>よくあるミス：</b>分子結晶と混同しない。共有結合の結晶は高融点。</div>
-  <div class="quiz"><b>確認問題：</b>ダイヤモンドは何結晶か。</div>
-  <details><summary>確認問題の答え</summary>共有結合の結晶</details>
-  <div class="actions">
-    <button onclick="mark('q13','done')">わかった</button>
-    <button onclick="mark('q13','wrong')">間違えた</button>
-    <button onclick="mark('q13','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q14" data-big="3">
+<div class="head"><h2>大問3 電気伝導性①</h2><span>#14</span></div>
+<div class="problem"><b>問題</b><br>金属結晶の融解液は電気を通すか。</div>
+<details><summary>答えを見る</summary><div class="answer">通す</div></details>
+<details open><summary>解説</summary><p>金属結晶には自由電子があり、固体でも融解状態でも電気を通す。</p></details>
+<div class="miss"><b>よくあるミス：</b>金属は固体でも通電する。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">Cu固体は電気を通すか。</div><details><summary>類題の答え</summary>通す</details></details>
+<div class="actions"><button onclick="mark('q14','done')">わかった</button><button onclick="mark('q14','wrong')">間違えた</button><button onclick="mark('q14','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q14">
-  <h2>3(イ)　金属結晶</h2>
-  <div class="answer"><b>答え：(c)</b></div>
-  <p><b>考え方：</b><br>金属結晶は自由電子をもつため、固体でも融解液でも電気を通す。</p>
-  <div class="miss"><b>よくあるミス：</b>金属は固体でも通電する。</div>
-  <div class="quiz"><b>確認問題：</b>Cu固体は電気を通すか。</div>
-  <details><summary>確認問題の答え</summary>通す</details>
-  <div class="actions">
-    <button onclick="mark('q14','done')">わかった</button>
-    <button onclick="mark('q14','wrong')">間違えた</button>
-    <button onclick="mark('q14','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q15" data-big="3">
+<div class="head"><h2>大問3 電気伝導性②</h2><span>#15</span></div>
+<div class="problem"><b>問題</b><br>イオン結晶の融解液は電気を通すか。</div>
+<details><summary>答えを見る</summary><div class="answer">通す</div></details>
+<details open><summary>解説</summary><p>融解液ではイオンが動けるため電気を通す。</p></details>
+<div class="miss"><b>よくあるミス：</b>固体NaClは通しにくいが融解液は通す。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">NaCl水溶液は電気を通すか。</div><details><summary>類題の答え</summary>通す</details></details>
+<div class="actions"><button onclick="mark('q15','done')">わかった</button><button onclick="mark('q15','wrong')">間違えた</button><button onclick="mark('q15','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q15">
-  <h2>3(ウ)　イオン結晶</h2>
-  <div class="answer"><b>答え：(c)</b></div>
-  <p><b>考え方：</b><br>イオン結晶は固体ではイオンが動けないが、融解液ではイオンが動けるので電気を通す。</p>
-  <div class="miss"><b>よくあるミス：</b>固体のNaClは通しにくい。融解液は通す。</div>
-  <div class="quiz"><b>確認問題：</b>NaCl水溶液は電気を通すか。</div>
-  <details><summary>確認問題の答え</summary>通す</details>
-  <div class="actions">
-    <button onclick="mark('q15','done')">わかった</button>
-    <button onclick="mark('q15','wrong')">間違えた</button>
-    <button onclick="mark('q15','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q16" data-big="3">
+<div class="head"><h2>大問3 電気伝導性③</h2><span>#16</span></div>
+<div class="problem"><b>問題</b><br>分子結晶の融解液は電気を通すか。</div>
+<details><summary>答えを見る</summary><div class="answer">通さない</div></details>
+<details open><summary>解説</summary><p>電荷を運ぶ自由電子や動けるイオンがない。</p></details>
+<div class="miss"><b>よくあるミス：</b>分子結晶は融解液でも通しにくい。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">ヨウ素の結晶は何結晶か。</div><details><summary>類題の答え</summary>分子結晶</details></details>
+<div class="actions"><button onclick="mark('q16','done')">わかった</button><button onclick="mark('q16','wrong')">間違えた</button><button onclick="mark('q16','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q16">
-  <h2>3(エ)　分子結晶</h2>
-  <div class="answer"><b>答え：(d)</b></div>
-  <p><b>考え方：</b><br>分子結晶は分子が電荷を運ぶ粒子ではないため、融解しても一般に電気を通さない。</p>
-  <div class="miss"><b>よくあるミス：</b>分子結晶は融解液でも通しにくい。</div>
-  <div class="quiz"><b>確認問題：</b>ヨウ素の結晶は何結晶か。</div>
-  <details><summary>確認問題の答え</summary>分子結晶</details>
-  <div class="actions">
-    <button onclick="mark('q16','done')">わかった</button>
-    <button onclick="mark('q16','wrong')">間違えた</button>
-    <button onclick="mark('q16','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q17" data-big="3">
+<div class="head"><h2>大問3 機械的性質①</h2><span>#17</span></div>
+<div class="problem"><b>問題</b><br>金属結晶の機械的性質を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">展性・延性を示す</div></details>
+<details open><summary>解説</summary><p>金属原子の層がずれても自由電子により結合が保たれる。</p></details>
+<div class="miss"><b>よくあるミス：</b>イオン結晶と区別する。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">金属を薄く広げられる性質は？</div><details><summary>類題の答え</summary>展性</details></details>
+<div class="actions"><button onclick="mark('q17','done')">わかった</button><button onclick="mark('q17','wrong')">間違えた</button><button onclick="mark('q17','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q17">
-  <h2>3(オ)　金属結晶の性質</h2>
-  <div class="answer"><b>答え：(e)</b></div>
-  <p><b>考え方：</b><br>金属結晶は展性・延性があり、たたくと広がり、引き延ばせる。</p>
-  <div class="miss"><b>よくあるミス：</b>硬くても割れやすいイオン結晶と区別する。</div>
-  <div class="quiz"><b>確認問題：</b>金属を薄く広げられる性質を何というか。</div>
-  <details><summary>確認問題の答え</summary>展性</details>
-  <div class="actions">
-    <button onclick="mark('q17','done')">わかった</button>
-    <button onclick="mark('q17','wrong')">間違えた</button>
-    <button onclick="mark('q17','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q18" data-big="3">
+<div class="head"><h2>大問3 機械的性質②</h2><span>#18</span></div>
+<div class="problem"><b>問題</b><br>イオン結晶の機械的性質を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">かたいが、割れやすい</div></details>
+<details open><summary>解説</summary><p>力を加えると同符号のイオンが向き合い反発して割れる。</p></details>
+<div class="miss"><b>よくあるミス：</b>『かたい』だけでなく『割れやすい』まで押さえる。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">NaCl結晶は金属のように延びるか。</div><details><summary>類題の答え</summary>延びない</details></details>
+<div class="actions"><button onclick="mark('q18','done')">わかった</button><button onclick="mark('q18','wrong')">間違えた</button><button onclick="mark('q18','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q18">
-  <h2>3(カ)　イオン結晶の性質</h2>
-  <div class="answer"><b>答え：(g)</b></div>
-  <p><b>考え方：</b><br>イオン結晶は力を加えると同符号のイオンが向き合い、反発して割れやすい。</p>
-  <div class="miss"><b>よくあるミス：</b>硬いがもろい、がポイント。</div>
-  <div class="quiz"><b>確認問題：</b>NaCl結晶は金属のように延びるか。</div>
-  <details><summary>確認問題の答え</summary>延びない</details>
-  <div class="actions">
-    <button onclick="mark('q18','done')">わかった</button>
-    <button onclick="mark('q18','wrong')">間違えた</button>
-    <button onclick="mark('q18','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q19" data-big="3">
+<div class="head"><h2>大問3 機械的性質③</h2><span>#19</span></div>
+<div class="problem"><b>問題</b><br>分子結晶の機械的性質を答えよ。</div>
+<details><summary>答えを見る</summary><div class="answer">やわらかく、くだけやすい</div></details>
+<details open><summary>解説</summary><p>分子間力が比較的弱いため、やわらかいものが多い。</p></details>
+<div class="miss"><b>よくあるミス：</b>共有結合の結晶と混同しない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">ドライアイスは何結晶か。</div><details><summary>類題の答え</summary>分子結晶</details></details>
+<div class="actions"><button onclick="mark('q19','done')">わかった</button><button onclick="mark('q19','wrong')">間違えた</button><button onclick="mark('q19','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q19">
-  <h2>3(キ)　分子結晶の性質</h2>
-  <div class="answer"><b>答え：(f)</b></div>
-  <p><b>考え方：</b><br>分子結晶は分子間力が比較的弱いため、やわらかいものが多い。</p>
-  <div class="miss"><b>よくあるミス：</b>共有結合の結晶の硬さと混同しない。</div>
-  <div class="quiz"><b>確認問題：</b>ドライアイスは何結晶か。</div>
-  <details><summary>確認問題の答え</summary>分子結晶</details>
-  <div class="actions">
-    <button onclick="mark('q19','done')">わかった</button>
-    <button onclick="mark('q19','wrong')">間違えた</button>
-    <button onclick="mark('q19','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q20" data-big="4">
+<div class="head"><h2>大問4 (5)</h2><span>#20</span></div>
+<div class="problem"><b>問題</b><br>NaCl 117g中に含まれる陽イオンと陰イオンの総数を求めよ。</div>
+<details><summary>答えを見る</summary><div class="answer">2.4×10²⁴個</div></details>
+<details open><summary>解説</summary><p>117÷58.5=2.0mol。NaCl 1molからNa⁺1molとCl⁻1mol、合計2molのイオン。したがって4.0molのイオンで、4.0×6.0×10²³=2.4×10²⁴個。</p></details>
+<div class="miss"><b>よくあるミス：</b>NaClの個数ではなく、イオンの総数を聞いている。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">CaCl₂ 111g中のイオン総数は？ CaCl₂=111</div><details><summary>類題の答え</summary>1.8×10²⁴個</details></details>
+<div class="actions"><button onclick="mark('q20','done')">わかった</button><button onclick="mark('q20','wrong')">間違えた</button><button onclick="mark('q20','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q20">
-  <h2>3(ク)　金属結合</h2>
-  <div class="answer"><b>答え：(j)</b></div>
-  <p><b>考え方：</b><br>金属原子が自由電子を共有してできる結合を金属結合という。</p>
-  <div class="miss"><b>よくあるミス：</b>自由電子がキーワード。</div>
-  <div class="quiz"><b>確認問題：</b>金属結晶で電気を運ぶ粒子は？</div>
-  <details><summary>確認問題の答え</summary>自由電子</details>
-  <div class="actions">
-    <button onclick="mark('q20','done')">わかった</button>
-    <button onclick="mark('q20','wrong')">間違えた</button>
-    <button onclick="mark('q20','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q21" data-big="4">
+<div class="head"><h2>大問4 (6)</h2><span>#21</span></div>
+<div class="problem"><b>問題</b><br>標準状態で密度1.34g/Lの気体の分子量を求めよ。</div>
+<details><summary>答えを見る</summary><div class="answer">30.0</div></details>
+<details open><summary>解説</summary><p>標準状態で気体1molは22.4L。1molの質量は1.34×22.4≒30.0g。</p></details>
+<div class="miss"><b>よくあるミス：</b>密度に22.4Lをかける。割らない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">標準状態で密度2.00g/Lの気体の分子量は？</div><details><summary>類題の答え</summary>44.8</details></details>
+<div class="actions"><button onclick="mark('q21','done')">わかった</button><button onclick="mark('q21','wrong')">間違えた</button><button onclick="mark('q21','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q21">
-  <h2>3(ケ)　イオン結合</h2>
-  <div class="answer"><b>答え：(k)</b></div>
-  <p><b>考え方：</b><br>陽イオンと陰イオンの静電気的な引力による結合。</p>
-  <div class="miss"><b>よくあるミス：</b>共有結合ではなくイオン結合。</div>
-  <div class="quiz"><b>確認問題：</b>NaClの構成粒子間の結合は？</div>
-  <details><summary>確認問題の答え</summary>イオン結合</details>
-  <div class="actions">
-    <button onclick="mark('q21','done')">わかった</button>
-    <button onclick="mark('q21','wrong')">間違えた</button>
-    <button onclick="mark('q21','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q22" data-big="5">
+<div class="head"><h2>大問5 (2)</h2><span>#22</span></div>
+<div class="problem"><b>問題</b><br>HFやNH₃などの沸点が分子量のわりに高い理由を説明せよ。</div>
+<details><summary>答えを見る</summary><div class="answer">分子間で水素結合を形成しているため。</div></details>
+<details open><summary>解説</summary><p>HがF・O・Nと結合していると分子間に強い水素結合が働く。</p></details>
+<div class="miss"><b>よくあるミス：</b>『分子間力』だけでは不十分。水素結合と書く。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">H₂Oの沸点がH₂Sより高い理由は？</div><details><summary>類題の答え</summary>水素結合を形成するため</details></details>
+<div class="actions"><button onclick="mark('q22','done')">わかった</button><button onclick="mark('q22','wrong')">間違えた</button><button onclick="mark('q22','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q22">
-  <h2>3(コ)　分子間力</h2>
-  <div class="answer"><b>答え：(h)</b></div>
-  <p><b>考え方：</b><br>分子結晶では分子どうしが分子間力で集まっている。</p>
-  <div class="miss"><b>よくあるミス：</b>分子内の共有結合ではなく、分子どうしの力。</div>
-  <div class="quiz"><b>確認問題：</b>ヨウ素分子I₂どうしに働く力は？</div>
-  <details><summary>確認問題の答え</summary>分子間力</details>
-  <div class="actions">
-    <button onclick="mark('q22','done')">わかった</button>
-    <button onclick="mark('q22','wrong')">間違えた</button>
-    <button onclick="mark('q22','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q23" data-big="5">
+<div class="head"><h2>大問5 (3)</h2><span>#23</span></div>
+<div class="problem"><b>問題</b><br>CH₄、SiH₄、GeH₄、SnH₄の沸点が分子量とともに高くなる理由を説明せよ。</div>
+<details><summary>答えを見る</summary><div class="answer">分子量が大きいほどファンデルワールス力が強くはたらくため。</div></details>
+<details open><summary>解説</summary><p>同族の水素化合物では分子量が大きいほどファンデルワールス力が強くなり、沸点が高くなる。</p></details>
+<div class="miss"><b>よくあるミス：</b>『分子間力』だけでは説明不足。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">HCl、HBr、HIで沸点が高いのはどれか。</div><details><summary>類題の答え</summary>HI</details></details>
+<div class="actions"><button onclick="mark('q23','done')">わかった</button><button onclick="mark('q23','wrong')">間違えた</button><button onclick="mark('q23','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q23">
-  <h2>3(サ)　共有結合</h2>
-  <div class="answer"><b>答え：(i)</b></div>
-  <p><b>考え方：</b><br>共有結合の結晶は、原子が共有結合で連続的につながっている。</p>
-  <div class="miss"><b>よくあるミス：</b>分子が集まった結晶ではない。</div>
-  <div class="quiz"><b>確認問題：</b>SiO₂は何結晶か。</div>
-  <details><summary>確認問題の答え</summary>共有結合の結晶</details>
-  <div class="actions">
-    <button onclick="mark('q23','done')">わかった</button>
-    <button onclick="mark('q23','wrong')">間違えた</button>
-    <button onclick="mark('q23','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q24" data-big="6">
+<div class="head"><h2>大問6 (2)</h2><span>#24</span></div>
+<div class="problem"><b>問題</b><br>85Rbが72%、87Rbが28%存在するRbの原子量を求めよ。</div>
+<details><summary>答えを見る</summary><div class="answer">85.6</div></details>
+<details open><summary>解説</summary><p>85×0.72+87×0.28=85.56≒85.6。</p></details>
+<div class="miss"><b>よくあるミス：</b>%を小数または分数に直す。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">35Clが75%、37Clが25%なら原子量は？</div><details><summary>類題の答え</summary>35.5</details></details>
+<div class="actions"><button onclick="mark('q24','done')">わかった</button><button onclick="mark('q24','wrong')">間違えた</button><button onclick="mark('q24','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q24">
-  <h2>4(1)　mol計算</h2>
-  <div class="answer"><b>答え：0.50 mol</b></div>
-  <p><b>考え方：</b><br>物質量は 質量÷モル質量 で求める。単位を確認してから計算する。</p>
-  <div class="miss"><b>よくあるミス：</b>gとmolを混同しない。</div>
-  <div class="quiz"><b>確認問題：</b>18gの水は何molか。</div>
-  <details><summary>確認問題の答え</summary>1.0mol</details>
-  <div class="actions">
-    <button onclick="mark('q24','done')">わかった</button>
-    <button onclick="mark('q24','wrong')">間違えた</button>
-    <button onclick="mark('q24','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q25" data-big="6">
+<div class="head"><h2>大問6 (3)</h2><span>#25</span></div>
+<div class="problem"><b>問題</b><br>同位体の存在比をx%とおいて、原子量からxを求めよ。</div>
+<details><summary>答えを見る</summary><div class="answer">4%</div></details>
+<details open><summary>解説</summary><p>未知の存在比をx%とおき、質量数×存在比の合計が原子量になるように式を作る。</p></details>
+<div class="miss"><b>よくあるミス：</b>存在比の合計が100%になるように置く。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">質量数10が60%、12が40%なら原子量は？</div><details><summary>類題の答え</summary>10.8</details></details>
+<div class="actions"><button onclick="mark('q25','done')">わかった</button><button onclick="mark('q25','wrong')">間違えた</button><button onclick="mark('q25','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q25">
-  <h2>4(2)　質量計算</h2>
-  <div class="answer"><b>答え：2.0 g</b></div>
-  <p><b>考え方：</b><br>質量は 物質量×モル質量 で求める。</p>
-  <div class="miss"><b>よくあるミス：</b>molを求めたら、最後にgへ戻す。</div>
-  <div class="quiz"><b>確認問題：</b>0.50molの水の質量は？</div>
-  <details><summary>確認問題の答え</summary>9.0g</details>
-  <div class="actions">
-    <button onclick="mark('q25','done')">わかった</button>
-    <button onclick="mark('q25','wrong')">間違えた</button>
-    <button onclick="mark('q25','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q26" data-big="7">
+<div class="head"><h2>大問7 (3)①</h2><span>#26</span></div>
+<div class="problem"><b>問題</b><br>メタンハイドレート47.8gからメタンが放出され、水41.4gが残った。水の物質量はメタンの何倍か。</div>
+<details><summary>答えを見る</summary><div class="answer">5.8倍</div></details>
+<details open><summary>解説</summary><p>放出メタンは47.8−41.4=6.4g。CH₄は16g/molなので0.40mol。水は41.4÷18=2.3mol。2.3÷0.40≒5.8。</p></details>
+<div class="miss"><b>よくあるミス：</b>質量比ではなく物質量比を求める。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">水36gは何molか。</div><details><summary>類題の答え</summary>2.0mol</details></details>
+<div class="actions"><button onclick="mark('q26','done')">わかった</button><button onclick="mark('q26','wrong')">間違えた</button><button onclick="mark('q26','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q26">
-  <h2>4(3)　mol計算</h2>
-  <div class="answer"><b>答え：1.5 mol</b></div>
-  <p><b>考え方：</b><br>粒子数や体積から物質量に直す問題では、基準を使ってmolに変換する。</p>
-  <div class="miss"><b>よくあるミス：</b>途中の単位を必ず書く。</div>
-  <div class="quiz"><b>確認問題：</b>標準状態で33.6Lの気体は何molか。</div>
-  <details><summary>確認問題の答え</summary>1.5mol</details>
-  <div class="actions">
-    <button onclick="mark('q26','done')">わかった</button>
-    <button onclick="mark('q26','wrong')">間違えた</button>
-    <button onclick="mark('q26','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q27" data-big="7">
+<div class="head"><h2>大問7 (3)②</h2><span>#27</span></div>
+<div class="problem"><b>問題</b><br>放出されたメタンの標準状態での体積は、もとのメタンハイドレートの体積の何倍か。</div>
+<details><summary>答えを見る</summary><div class="answer">1.7×10²倍</div></details>
+<details open><summary>解説</summary><p>試料体積は47.8÷0.91=52.5cm³。メタン0.40molは8.96L=8960cm³。8960÷52.5≒1.7×10²。</p></details>
+<div class="miss"><b>よくあるミス：</b>Lをcm³に直す。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">標準状態で0.20molの気体は何Lか。</div><details><summary>類題の答え</summary>4.48L</details></details>
+<div class="actions"><button onclick="mark('q27','done')">わかった</button><button onclick="mark('q27','wrong')">間違えた</button><button onclick="mark('q27','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q27">
-  <h2>4(4)　mol計算</h2>
-  <div class="answer"><b>答え：0.25 mol</b></div>
-  <p><b>考え方：</b><br>与えられた量をmolに直し、必要なら係数比を使う。</p>
-  <div class="miss"><b>よくあるミス：</b>係数比と物質量比は同じ。</div>
-  <div class="quiz"><b>確認問題：</b>標準状態で5.6Lの気体は何molか。</div>
-  <details><summary>確認問題の答え</summary>0.25mol</details>
-  <div class="actions">
-    <button onclick="mark('q27','done')">わかった</button>
-    <button onclick="mark('q27','wrong')">間違えた</button>
-    <button onclick="mark('q27','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q28" data-big="8">
+<div class="head"><h2>大問8 (3)BN</h2><span>#28</span></div>
+<div class="problem"><b>問題</b><br>BNの結晶の種類を選べ。</div>
+<details><summary>答えを見る</summary><div class="answer">BN、(d)</div></details>
+<details open><summary>解説</summary><p>BとNの組み合わせは共有結合性が強く、高融点なので共有結合の結晶と判断する。</p></details>
+<div class="miss"><b>よくあるミス：</b>BNを単なる分子結晶にしない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">SiCは何結晶か。</div><details><summary>類題の答え</summary>共有結合の結晶</details></details>
+<div class="actions"><button onclick="mark('q28','done')">わかった</button><button onclick="mark('q28','wrong')">間違えた</button><button onclick="mark('q28','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q28">
-  <h2>4(5)　イオン数</h2>
-  <div class="answer"><b>答え：2.4×10²⁴個</b></div>
-  <p><b>考え方：</b><br>NaCl 117gは117÷58.5=2.0mol。NaCl 1molからNa⁺1molとCl⁻1mol、合計2molのイオン。したがってイオンは4.0mol、個数は4.0×6.0×10²³=2.4×10²⁴個。</p>
-  <div class="miss"><b>よくあるミス：</b>NaClの個数ではなく、イオンの総数を聞いている。</div>
-  <div class="quiz"><b>確認問題：</b>CaCl₂ 111g中のイオン総数は？ CaCl₂=111</div>
-  <details><summary>確認問題の答え</summary>1.8×10²⁴個</details>
-  <div class="actions">
-    <button onclick="mark('q28','done')">わかった</button>
-    <button onclick="mark('q28','wrong')">間違えた</button>
-    <button onclick="mark('q28','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q29" data-big="8">
+<div class="head"><h2>大問8 (3)Na₂S</h2><span>#29</span></div>
+<div class="problem"><b>問題</b><br>Na₂Sの結晶の種類を選べ。</div>
+<details><summary>答えを見る</summary><div class="answer">Na₂S、(a)</div></details>
+<details open><summary>解説</summary><p>NaとSは電気陰性度差が大きく、陽イオンと陰イオンからなるイオン結晶。</p></details>
+<div class="miss"><b>よくあるミス：</b>Na₂Sは金属結晶ではない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">KClは何結晶か。</div><details><summary>類題の答え</summary>イオン結晶</details></details>
+<div class="actions"><button onclick="mark('q29','done')">わかった</button><button onclick="mark('q29','wrong')">間違えた</button><button onclick="mark('q29','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q29">
-  <h2>4(6)　気体の分子量</h2>
-  <div class="answer"><b>答え：30.0</b></div>
-  <p><b>考え方：</b><br>標準状態で気体1molは22.4L。密度1.34g/Lなら、1molの質量は1.34×22.4≒30.0g。よって分子量30.0。</p>
-  <div class="miss"><b>よくあるミス：</b>密度に22.4Lをかける。割らない。</div>
-  <div class="quiz"><b>確認問題：</b>標準状態で密度2.00g/Lの気体の分子量は？</div>
-  <details><summary>確認問題の答え</summary>44.8</details>
-  <div class="actions">
-    <button onclick="mark('q29','done')">わかった</button>
-    <button onclick="mark('q29','wrong')">間違えた</button>
-    <button onclick="mark('q29','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q30" data-big="9">
+<div class="head"><h2>大問9 (1)ア</h2><span>#30</span></div>
+<div class="problem"><b>問題</b><br>膜の面積S、1分子の断面積Bから、膜を作る分子数を表せ。</div>
+<details><summary>答えを見る</summary><div class="answer">S/B</div></details>
+<details open><summary>解説</summary><p>面積Sを1分子の面積Bで割ると、膜を作っている分子数になる。</p></details>
+<div class="miss"><b>よくあるミス：</b>面積÷1分子の面積。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">面積100、1分子の面積2なら分子数は？</div><details><summary>類題の答え</summary>50</details></details>
+<div class="actions"><button onclick="mark('q30','done')">わかった</button><button onclick="mark('q30','wrong')">間違えた</button><button onclick="mark('q30','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q30">
-  <h2>5(1)ア　水素化合物</h2>
-  <div class="answer"><b>答え：H₂O</b></div>
-  <p><b>考え方：</b><br>16族の水素化合物で、酸素の水素化物はH₂O。</p>
-  <div class="miss"><b>よくあるミス：</b>族と化学式の対応を確認する。</div>
-  <div class="quiz"><b>確認問題：</b>硫黄の水素化物は？</div>
-  <details><summary>確認問題の答え</summary>H₂S</details>
-  <div class="actions">
-    <button onclick="mark('q30','done')">わかった</button>
-    <button onclick="mark('q30','wrong')">間違えた</button>
-    <button onclick="mark('q30','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q31" data-big="9">
+<div class="head"><h2>大問9 (1)イ</h2><span>#31</span></div>
+<div class="problem"><b>問題</b><br>質量W、分子量M、アボガドロ定数NAから分子数を表せ。</div>
+<details><summary>答えを見る</summary><div class="answer">WNA/M</div></details>
+<details open><summary>解説</summary><p>物質量はW/M mol。分子数はそれにNAをかけてWNA/M。</p></details>
+<div class="miss"><b>よくあるミス：</b>W/Mでmol、さらにNAをかける。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">2molの分子数は？</div><details><summary>類題の答え</summary>2NA</details></details>
+<div class="actions"><button onclick="mark('q31','done')">わかった</button><button onclick="mark('q31','wrong')">間違えた</button><button onclick="mark('q31','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q31">
-  <h2>5(1)イ　水素化合物</h2>
-  <div class="answer"><b>答え：PH₃</b></div>
-  <p><b>考え方：</b><br>15族の水素化合物で、リンの水素化物はPH₃。</p>
-  <div class="miss"><b>よくあるミス：</b>NH₃と同じ型。</div>
-  <div class="quiz"><b>確認問題：</b>窒素の水素化物は？</div>
-  <details><summary>確認問題の答え</summary>NH₃</details>
-  <div class="actions">
-    <button onclick="mark('q31','done')">わかった</button>
-    <button onclick="mark('q31','wrong')">間違えた</button>
-    <button onclick="mark('q31','review')">もう一度</button>
-  </div>
+<section class="card" data-id="q32" data-big="9">
+<div class="head"><h2>大問9 (1)ウ</h2><span>#32</span></div>
+<div class="problem"><b>問題</b><br>S/B = WNA/M をNAについて解け。</div>
+<details><summary>答えを見る</summary><div class="answer">MS/BW</div></details>
+<details open><summary>解説</summary><p>両辺を整理して、NA=MS/BW。</p></details>
+<div class="miss"><b>よくあるミス：</b>WとMの位置を逆にしない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">S/B = WNA/M をNAについて解け。</div><details><summary>類題の答え</summary>NA=MS/BW</details></details>
+<div class="actions"><button onclick="mark('q32','done')">わかった</button><button onclick="mark('q32','wrong')">間違えた</button><button onclick="mark('q32','review')">もう一度</button></div>
 </section>
 
-<section class="card" data-id="q32">
-  <h2>5(1)ウ　水素化合物</h2>
-  <div class="answer"><b>答え：CH₄</b></div>
-  <p><b>考え方：</b><br>14族の水素化合物で、炭素の水素化物はCH₄。</p>
-  <div class="miss"><b>よくあるミス：</b>14族はHが4つ。</div>
-  <div class="quiz"><b>確認問題：</b>Siの水素化物は？</div>
-  <details><summary>確認問題の答え</summary>SiH₄</details>
-  <div class="actions">
-    <button onclick="mark('q32','done')">わかった</button>
-    <button onclick="mark('q32','wrong')">間違えた</button>
-    <button onclick="mark('q32','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q33">
-  <h2>5(1)エ　水素化合物</h2>
-  <div class="answer"><b>答え：HBr</b></div>
-  <p><b>考え方：</b><br>17族の水素化合物で、臭素の水素化物はHBr。</p>
-  <div class="miss"><b>よくあるミス：</b>ハロゲンの水素化物はHX型。</div>
-  <div class="quiz"><b>確認問題：</b>塩素の水素化物は？</div>
-  <details><summary>確認問題の答え</summary>HCl</details>
-  <div class="actions">
-    <button onclick="mark('q33','done')">わかった</button>
-    <button onclick="mark('q33','wrong')">間違えた</button>
-    <button onclick="mark('q33','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q34">
-  <h2>5(2)　水素結合</h2>
-  <div class="answer"><b>答え：分子間で水素結合を形成しているため。</b></div>
-  <p><b>考え方：</b><br>HFやH₂OやNH₃は、HがF・O・Nと結合しているため分子間に水素結合が働く。そのため分子量のわりに沸点が高い。</p>
-  <div class="miss"><b>よくあるミス：</b>『分子間力』だけでは不十分。水素結合と書く。</div>
-  <div class="quiz"><b>確認問題：</b>H₂Oの沸点がH₂Sより高い理由は？</div>
-  <details><summary>確認問題の答え</summary>水素結合を形成するため</details>
-  <div class="actions">
-    <button onclick="mark('q34','done')">わかった</button>
-    <button onclick="mark('q34','wrong')">間違えた</button>
-    <button onclick="mark('q34','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q35">
-  <h2>5(3)　ファンデルワールス力</h2>
-  <div class="answer"><b>答え：分子量が大きいほどファンデルワールス力が強くはたらくため。</b></div>
-  <p><b>考え方：</b><br>CH₄、SiH₄、GeH₄、SnH₄のような同族の水素化合物では、分子量が大きいほどファンデルワールス力が強くなり、沸点が高くなる。</p>
-  <div class="miss"><b>よくあるミス：</b>『分子間力』だけでは説明不足。ファンデルワールス力と書く。</div>
-  <div class="quiz"><b>確認問題：</b>HCl、HBr、HIで沸点が高いのはどれか。</div>
-  <details><summary>確認問題の答え</summary>HI</details>
-  <div class="actions">
-    <button onclick="mark('q35','done')">わかった</button>
-    <button onclick="mark('q35','wrong')">間違えた</button>
-    <button onclick="mark('q35','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q36">
-  <h2>6(1)　原子量</h2>
-  <div class="answer"><b>答え：63.6</b></div>
-  <p><b>考え方：</b><br>同位体の質量数と存在比から加重平均で求める。原子量は存在比を反映した平均値。</p>
-  <div class="miss"><b>よくあるミス：</b>単純平均ではない。存在比をかける。</div>
-  <div class="quiz"><b>確認問題：</b>質量数10が20%、11が80%の元素の原子量は？</div>
-  <details><summary>確認問題の答え</summary>10.8</details>
-  <div class="actions">
-    <button onclick="mark('q36','done')">わかった</button>
-    <button onclick="mark('q36','wrong')">間違えた</button>
-    <button onclick="mark('q36','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q37">
-  <h2>6(2)　Rbの原子量</h2>
-  <div class="answer"><b>答え：85.6</b></div>
-  <p><b>考え方：</b><br>85Rbが72%、87Rbが28%。85×72/100 + 87×28/100 = 85.56 ≒85.6。</p>
-  <div class="miss"><b>よくあるミス：</b>%を小数または分数に直す。</div>
-  <div class="quiz"><b>確認問題：</b>35Clが75%、37Clが25%なら原子量は？</div>
-  <details><summary>確認問題の答え</summary>35.5</details>
-  <div class="actions">
-    <button onclick="mark('q37','done')">わかった</button>
-    <button onclick="mark('q37','wrong')">間違えた</button>
-    <button onclick="mark('q37','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q38">
-  <h2>6(3)　未知の存在比</h2>
-  <div class="answer"><b>答え：4%</b></div>
-  <p><b>考え方：</b><br>未知の存在比をx%とおき、質量数×存在比の合計が原子量195.08になるように式を作る。表にしてから計算する。</p>
-  <div class="miss"><b>よくあるミス：</b>存在比の合計が100%になるように置く。</div>
-  <div class="quiz"><b>確認問題：</b>Aが60%、Bが40%。質量数10と12なら原子量は？</div>
-  <details><summary>確認問題の答え</summary>10.8</details>
-  <div class="actions">
-    <button onclick="mark('q38','done')">わかった</button>
-    <button onclick="mark('q38','wrong')">間違えた</button>
-    <button onclick="mark('q38','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q39">
-  <h2>7(1)①　CO₂の電子式</h2>
-  <div class="answer"><b>答え：O=C=Oの電子式</b></div>
-  <p><b>考え方：</b><br>CO₂はCを中心にOと二重結合を2本作る。Oには非共有電子対が2組ずつ残る。</p>
-  <div class="miss"><b>よくあるミス：</b>Cに非共有電子対はない。</div>
-  <div class="quiz"><b>確認問題：</b>CO₂のC-O結合は何重結合か。</div>
-  <details><summary>確認問題の答え</summary>二重結合</details>
-  <div class="actions">
-    <button onclick="mark('q39','done')">わかった</button>
-    <button onclick="mark('q39','wrong')">間違えた</button>
-    <button onclick="mark('q39','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q40">
-  <h2>7(1)②　CO₂の形</h2>
-  <div class="answer"><b>答え：直線形</b></div>
-  <p><b>考え方：</b><br>Cのまわりの電子対領域は2つ。反発を最小にするため180°に広がり、直線形になる。</p>
-  <div class="miss"><b>よくあるミス：</b>折れ線形ではない。中心Cに非共有電子対がない。</div>
-  <div class="quiz"><b>確認問題：</b>CO₂の結合角はおよそ何度か。</div>
-  <details><summary>確認問題の答え</summary>180°</details>
-  <div class="actions">
-    <button onclick="mark('q40','done')">わかった</button>
-    <button onclick="mark('q40','wrong')">間違えた</button>
-    <button onclick="mark('q40','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q41">
-  <h2>7(2)　メタンハイドレートの性質</h2>
-  <div class="answer"><b>答え：①④</b></div>
-  <p><b>考え方：</b><br>メタンハイドレートは水分子の作るかご状構造にメタン分子が取り込まれた物質。記述の正誤を構造と性質から判断する。</p>
-  <div class="miss"><b>よくあるミス：</b>メタンと水が共有結合で化合しているわけではない。</div>
-  <div class="quiz"><b>確認問題：</b>メタンハイドレート中の主な気体分子は？</div>
-  <details><summary>確認問題の答え</summary>メタン</details>
-  <div class="actions">
-    <button onclick="mark('q41','done')">わかった</button>
-    <button onclick="mark('q41','wrong')">間違えた</button>
-    <button onclick="mark('q41','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q42">
-  <h2>7(3)①　物質量比</h2>
-  <div class="answer"><b>答え：5.8倍</b></div>
-  <p><b>考え方：</b><br>放出メタンは47.8−41.4=6.4g。CH₄は16g/molなので0.40mol。水は41.4÷18=2.3mol。2.3÷0.40≒5.8。</p>
-  <div class="miss"><b>よくあるミス：</b>質量比ではなく物質量比を求める。</div>
-  <div class="quiz"><b>確認問題：</b>水36gは何molか。</div>
-  <details><summary>確認問題の答え</summary>2.0mol</details>
-  <div class="actions">
-    <button onclick="mark('q42','done')">わかった</button>
-    <button onclick="mark('q42','wrong')">間違えた</button>
-    <button onclick="mark('q42','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q43">
-  <h2>7(3)②　体積比</h2>
-  <div class="answer"><b>答え：1.7×10²倍</b></div>
-  <p><b>考え方：</b><br>試料体積は47.8÷0.91=52.5cm³。メタン0.40molは標準状態で0.40×22.4=8.96L=8960cm³。8960÷52.5≒1.7×10²。</p>
-  <div class="miss"><b>よくあるミス：</b>Lをcm³に直す。1L=1000cm³。</div>
-  <div class="quiz"><b>確認問題：</b>標準状態で0.20molの気体は何Lか。</div>
-  <details><summary>確認問題の答え</summary>4.48L</details>
-  <div class="actions">
-    <button onclick="mark('q43','done')">わかった</button>
-    <button onclick="mark('q43','wrong')">間違えた</button>
-    <button onclick="mark('q43','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q44">
-  <h2>8(1)ア　極性</h2>
-  <div class="answer"><b>答え：極性</b></div>
-  <p><b>考え方：</b><br>結合している原子間に電気陰性度の差があると、共有電子対が偏り、結合に極性が生じる。</p>
-  <div class="miss"><b>よくあるミス：</b>分子全体の極性と結合の極性を区別する。</div>
-  <div class="quiz"><b>確認問題：</b>H-Cl結合には極性があるか。</div>
-  <details><summary>確認問題の答え</summary>ある</details>
-  <div class="actions">
-    <button onclick="mark('q44','done')">わかった</button>
-    <button onclick="mark('q44','wrong')">間違えた</button>
-    <button onclick="mark('q44','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q45">
-  <h2>8(1)イ　自由電子</h2>
-  <div class="answer"><b>答え：自由</b></div>
-  <p><b>考え方：</b><br>金属結合では、価電子が特定の原子に固定されず自由電子として動ける。</p>
-  <div class="miss"><b>よくあるミス：</b>金属の電気伝導性は自由電子で説明する。</div>
-  <div class="quiz"><b>確認問題：</b>金属中で電気を運ぶものは？</div>
-  <details><summary>確認問題の答え</summary>自由電子</details>
-  <div class="actions">
-    <button onclick="mark('q45','done')">わかった</button>
-    <button onclick="mark('q45','wrong')">間違えた</button>
-    <button onclick="mark('q45','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q46">
-  <h2>8(1)ウ　半導体</h2>
-  <div class="answer"><b>答え：半導体</b></div>
-  <p><b>考え方：</b><br>ケイ素などは条件により電気を通す半導体として利用される。</p>
-  <div class="miss"><b>よくあるミス：</b>金属ではなく半導体。</div>
-  <div class="quiz"><b>確認問題：</b>Siは導体・絶縁体・半導体のどれか。</div>
-  <details><summary>確認問題の答え</summary>半導体</details>
-  <div class="actions">
-    <button onclick="mark('q46','done')">わかった</button>
-    <button onclick="mark('q46','wrong')">間違えた</button>
-    <button onclick="mark('q46','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q47">
-  <h2>8(1)エ　分子間力</h2>
-  <div class="answer"><b>答え：分子間力</b></div>
-  <p><b>考え方：</b><br>分子結晶では分子どうしに分子間力が働いて集合している。</p>
-  <div class="miss"><b>よくあるミス：</b>分子内の共有結合とは別。</div>
-  <div class="quiz"><b>確認問題：</b>ドライアイスでCO₂分子どうしに働く力は？</div>
-  <details><summary>確認問題の答え</summary>分子間力</details>
-  <div class="actions">
-    <button onclick="mark('q47','done')">わかった</button>
-    <button onclick="mark('q47','wrong')">間違えた</button>
-    <button onclick="mark('q47','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q48">
-  <h2>8(1)オ　ファンデルワールス力</h2>
-  <div class="answer"><b>答え：ファンデルワールス力</b></div>
-  <p><b>考え方：</b><br>分子間力の一種。分子量が大きいほど強くなる傾向がある。</p>
-  <div class="miss"><b>よくあるミス：</b>水素結合と区別する。</div>
-  <div class="quiz"><b>確認問題：</b>CH₄よりSnH₄の沸点が高い主因は？</div>
-  <details><summary>確認問題の答え</summary>ファンデルワールス力が強い</details>
-  <div class="actions">
-    <button onclick="mark('q48','done')">わかった</button>
-    <button onclick="mark('q48','wrong')">間違えた</button>
-    <button onclick="mark('q48','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q49">
-  <h2>8(1)カ　融点</h2>
-  <div class="answer"><b>答え：高</b></div>
-  <p><b>考え方：</b><br>共有結合の結晶は原子が共有結合で巨大につながるため、融点が高い。</p>
-  <div class="miss"><b>よくあるミス：</b>分子結晶の低融点と区別する。</div>
-  <div class="quiz"><b>確認問題：</b>ダイヤモンドの融点は低いか高いか。</div>
-  <details><summary>確認問題の答え</summary>高い</details>
-  <div class="actions">
-    <button onclick="mark('q49','done')">わかった</button>
-    <button onclick="mark('q49','wrong')">間違えた</button>
-    <button onclick="mark('q49','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q50">
-  <h2>8(2)　グラフ判断</h2>
-  <div class="answer"><b>答え：(c)</b></div>
-  <p><b>考え方：</b><br>電気陰性度の平均と差から、図の領域を読み取って結合の性質を判断する。</p>
-  <div class="miss"><b>よくあるミス：</b>平均と差を逆にしない。</div>
-  <div class="quiz"><b>確認問題：</b>電気陰性度差が大きいと何結合に近づくか。</div>
-  <details><summary>確認問題の答え</summary>イオン結合</details>
-  <div class="actions">
-    <button onclick="mark('q50','done')">わかった</button>
-    <button onclick="mark('q50','wrong')">間違えた</button>
-    <button onclick="mark('q50','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q51">
-  <h2>8(3)BN　共有結合の結晶</h2>
-  <div class="answer"><b>答え：BN、(d)</b></div>
-  <p><b>考え方：</b><br>BとNの組み合わせは共有結合性が強く、さらに高融点なので共有結合の結晶と判断する。</p>
-  <div class="miss"><b>よくあるミス：</b>BNを単なる分子結晶にしない。</div>
-  <div class="quiz"><b>確認問題：</b>SiCは何結晶か。</div>
-  <details><summary>確認問題の答え</summary>共有結合の結晶</details>
-  <div class="actions">
-    <button onclick="mark('q51','done')">わかった</button>
-    <button onclick="mark('q51','wrong')">間違えた</button>
-    <button onclick="mark('q51','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q52">
-  <h2>8(3)Na₂S　イオン結晶</h2>
-  <div class="answer"><b>答え：Na₂S、(a)</b></div>
-  <p><b>考え方：</b><br>NaとSは電気陰性度差が大きく、陽イオンと陰イオンからなるイオン結晶と判断する。</p>
-  <div class="miss"><b>よくあるミス：</b>Naは金属元素だが、Na₂Sは金属結晶ではない。</div>
-  <div class="quiz"><b>確認問題：</b>KClは何結晶か。</div>
-  <details><summary>確認問題の答え</summary>イオン結晶</details>
-  <div class="actions">
-    <button onclick="mark('q52','done')">わかった</button>
-    <button onclick="mark('q52','wrong')">間違えた</button>
-    <button onclick="mark('q52','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q53">
-  <h2>8(4)　金属結晶の性質</h2>
-  <div class="answer"><b>答え：(b)(e)</b></div>
-  <p><b>考え方：</b><br>MgとFeはいずれも金属元素なので金属結晶の性質を選ぶ。金属は自由電子により固体・融解状態で電気を通し、展性・延性・熱伝導性をもつ。</p>
-  <div class="miss"><b>よくあるミス：</b>金属は融解状態でも電気を通す。</div>
-  <div class="quiz"><b>確認問題：</b>金属を線状に引き伸ばせる性質は？</div>
-  <details><summary>確認問題の答え</summary>延性</details>
-  <div class="actions">
-    <button onclick="mark('q53','done')">わかった</button>
-    <button onclick="mark('q53','wrong')">間違えた</button>
-    <button onclick="mark('q53','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q54">
-  <h2>9(1)ア　単分子膜</h2>
-  <div class="answer"><b>答え：S/B</b></div>
-  <p><b>考え方：</b><br>膜の面積Sを1分子の断面積Bで割ると、膜を作っている分子数になる。</p>
-  <div class="miss"><b>よくあるミス：</b>面積÷1分子の面積。</div>
-  <div class="quiz"><b>確認問題：</b>面積100、1分子の面積2なら分子数は？</div>
-  <details><summary>確認問題の答え</summary>50</details>
-  <div class="actions">
-    <button onclick="mark('q54','done')">わかった</button>
-    <button onclick="mark('q54','wrong')">間違えた</button>
-    <button onclick="mark('q54','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q55">
-  <h2>9(1)イ　分子数</h2>
-  <div class="answer"><b>答え：WNA/M</b></div>
-  <p><b>考え方：</b><br>質量W、分子量Mの物質量はW/M mol。分子数はそれにアボガドロ定数NAをかけてWNA/M。</p>
-  <div class="miss"><b>よくあるミス：</b>W/Mでmol、さらにNAをかける。</div>
-  <div class="quiz"><b>確認問題：</b>2molの分子数は？</div>
-  <details><summary>確認問題の答え</summary>2NA</details>
-  <div class="actions">
-    <button onclick="mark('q55','done')">わかった</button>
-    <button onclick="mark('q55','wrong')">間違えた</button>
-    <button onclick="mark('q55','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q56">
-  <h2>9(1)ウ　アボガドロ定数</h2>
-  <div class="answer"><b>答え：MS/BW</b></div>
-  <p><b>考え方：</b><br>S/B = WNA/M とおき、NAについて解くと NA=MS/BW。</p>
-  <div class="miss"><b>よくあるミス：</b>式変形でWとMの位置を逆にしない。</div>
-  <div class="quiz"><b>確認問題：</b>S/B = WNA/M をNAについて解け。</div>
-  <details><summary>確認問題の答え</summary>NA=MS/BW</details>
-  <div class="actions">
-    <button onclick="mark('q56','done')">わかった</button>
-    <button onclick="mark('q56','wrong')">間違えた</button>
-    <button onclick="mark('q56','review')">もう一度</button>
-  </div>
-</section>
-
-<section class="card" data-id="q57">
-  <h2>9(2)　数値代入</h2>
-  <div class="answer"><b>答え：5.93×10²³</b></div>
-  <p><b>考え方：</b><br>0.0424gを500cm³に溶かし、そのうち0.100cm³を使うのでW=0.0424×0.100/500=8.48×10⁻⁶g。NA=MS/BWに代入する。</p>
-  <div class="miss"><b>よくあるミス：</b>全量0.0424gを使わない。実際に使った0.100cm³分だけ。</div>
-  <div class="quiz"><b>確認問題：</b>0.0424g/500cm³溶液の0.200cm³中の質量は？</div>
-  <details><summary>確認問題の答え</summary>1.696×10⁻⁵g</details>
-  <div class="actions">
-    <button onclick="mark('q57','done')">わかった</button>
-    <button onclick="mark('q57','wrong')">間違えた</button>
-    <button onclick="mark('q57','review')">もう一度</button>
-  </div>
-</section>
-
-</main>
-<script>
-const ids=[...document.querySelectorAll('.card')].map(c=>c.dataset.id);
-function getState(){return JSON.parse(localStorage.getItem('chemReviewStateSmall')||'{}')}
-function saveState(s){localStorage.setItem('chemReviewStateSmall',JSON.stringify(s))}
+<section class="card" data-id="q33" data-big="9">
+<div class="head"><h2>大問9 (2)</h2><span>#33</span></div>
+<div class="problem"><b>問題</b><br>ステアリン酸の単分子膜のデータからアボガドロ定数を求めよ。</div>
+<details><summary>答えを見る</summary><div class="answer">5.93×10²³</div></details>
+<details open><summary>解説</summary><p>使った溶液は0.100cm³なのでW=0.0424×0.100/500=8.48×10⁻⁶g。NA=MS/BWに代入する。</p></details>
+<div class="miss"><b>よくあるミス：</b>全量0.0424gを使わない。</div>
+<details><summary>類題に挑戦</summary><div class="quiz">0.0424g/500cm³溶液の0.200cm³中の質量は？</div><details><summary>類題の答え</summary>1.696×10⁻⁵g</details></details>
+<div class="actions"><button onclick="mark('q33','done')">わかった</button><button onclick="mark('q33','wrong')">間違えた</button><button onclick="mark('q33','review')">もう一度</button></div>
+</section></main><script>
+const ids=[...document.querySelectorAll('.card')].map(c=>c.dataset.id);let currentFilter='all';let currentBig='all';
+function getState(){return JSON.parse(localStorage.getItem('chemReviewStateProblemIncluded')||'{}')}function saveState(s){localStorage.setItem('chemReviewStateProblemIncluded',JSON.stringify(s))}
 function mark(id,status){const s=getState();s[id]=status;saveState(s);applyState()}
-let currentFilter='all';
-function applyState(){
- const s=getState();let done=0,wrong=0,review=0;
- document.querySelectorAll('.card').forEach(card=>{
-  const st=s[card.dataset.id];card.classList.remove('done','wrong','review');
-  if(st)card.classList.add(st);
-  if(st==='done')done++;if(st==='wrong')wrong++;if(st==='review')review++;
- });
- const completed=Object.keys(s).filter(k=>ids.includes(k)).length;
- document.getElementById('bar').style.width=(completed/ids.length*100)+'%';
- document.getElementById('stats').textContent=`記録済み ${completed}/${ids.length}｜わかった ${done}｜間違い ${wrong}｜もう一度 ${review}`;
- applyFilter(currentFilter);
-}
-function setFilter(f,btn){currentFilter=f;document.querySelectorAll('header button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');applyFilter(f)}
-function applyFilter(f){const s=getState();document.querySelectorAll('.card').forEach(card=>{const st=s[card.dataset.id];let show=true;if(f==='wrong')show=st==='wrong';if(f==='review')show=st==='review';if(f==='todo')show=!st;card.classList.toggle('hidden',!show)})}
-function resetAll(){if(confirm('進行状況をすべてリセットしますか？')){localStorage.removeItem('chemReviewStateSmall');applyState()}}
-function jumpTo(id){document.querySelector(`[data-id="${id}"]`)?.scrollIntoView({behavior:'smooth',block:'start'})}
-applyState();
-</script>
-</body>
-</html>
+function applyState(){const s=getState();let done=0,wrong=0,review=0;document.querySelectorAll('.card').forEach(card=>{const st=s[card.dataset.id];card.classList.remove('done','wrong','review');if(st)card.classList.add(st);if(st==='done')done++;if(st==='wrong')wrong++;if(st==='review')review++;});const completed=Object.keys(s).filter(k=>ids.includes(k)).length;document.getElementById('bar').style.width=(completed/ids.length*100)+'%';document.getElementById('stats').textContent=`記録済み ${completed}/${ids.length}｜わかった ${done}｜間違い ${wrong}｜もう一度 ${review}`;applyView();}
+function setFilter(f,btn){currentFilter=f;document.querySelectorAll('.controls button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');applyView()}
+function setBig(big,btn){currentBig=String(big);document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');applyView();window.scrollTo({top:0,behavior:'smooth'})}
+function applyView(){const s=getState();document.querySelectorAll('.card').forEach(card=>{const st=s[card.dataset.id];let show=true;if(currentBig!=='all')show=show&&card.dataset.big===currentBig;if(currentFilter==='wrong')show=show&&st==='wrong';if(currentFilter==='review')show=show&&st==='review';if(currentFilter==='todo')show=show&&!st;card.classList.toggle('hidden',!show);})}
+function resetAll(){if(confirm('進行状況をすべてリセットしますか？')){localStorage.removeItem('chemReviewStateProblemIncluded');applyState()}}applyState();
+</script></body></html>
